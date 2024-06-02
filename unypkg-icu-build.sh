@@ -77,8 +77,6 @@ get_include_paths
 
 unset LD_RUN_PATH
 
-cd source || exit
-
 ./configure \
     --prefix=/uny/pkg/"$pkgname"/"$pkgver"
 
