@@ -77,6 +77,8 @@ get_include_paths
 
 unset LD_RUN_PATH
 
+cd icu4c/source || exit
+
 ./configure \
     --prefix=/uny/pkg/"$pkgname"/"$pkgver"
 
