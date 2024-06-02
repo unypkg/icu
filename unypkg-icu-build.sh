@@ -35,13 +35,13 @@ mkdir -pv /uny/sources
 cd /uny/sources || exit
 
 pkgname="icu"
-pkggit="https://github.com/icu/icu.git refs/tags/*"
+pkggit=" https://github.com/unicode-org/icu.git refs/tags/release-*"
 gitdepth="--depth=1"
 
 ### Get version info from git remote
 # shellcheck disable=SC2086
-latest_head="$(git ls-remote --refs --tags --sort="v:refname" $pkggit | grep -E "v[0-9.]+$" | tail --lines=1)"
-latest_ver="$(echo "$latest_head" | grep -o "v[0-9.].*" | sed "s|v||")"
+latest_head="$(git ls-remote --refs --tags --sort="v:refname" $pkggit | grep -E "release-[0-9-]+$" | tail --lines=1)"
+latest_ver="$(echo "$latest_head" | grep -o "release-[0-9-].*" | sed -e "s|release-||" -e "s|-|.|")"
 latest_commit_id="$(echo "$latest_head" | cut --fields=1)"
 
 version_details
@@ -77,11 +77,13 @@ get_include_paths
 
 unset LD_RUN_PATH
 
+cd source || exit
+
 ./configure \
     --prefix=/uny/pkg/"$pkgname"/"$pkgver"
 
 make -j"$(nproc)"
-make -j"$(nproc)" check 
+
 make -j"$(nproc)" install
 
 ####################################################
