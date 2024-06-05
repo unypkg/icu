@@ -35,7 +35,7 @@ mkdir -pv /uny/sources
 cd /uny/sources || exit
 
 pkgname="icu"
-pkggit="https://github.com/unicode-org/icu.git refs/tags/release-68*"
+pkggit="https://github.com/unicode-org/icu.git refs/tags/release-73*"
 gitdepth="--depth=1"
 
 ### Get version info from git remote
