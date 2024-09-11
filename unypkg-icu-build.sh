@@ -80,7 +80,8 @@ unset LD_RUN_PATH
 cd icu4c/source || exit
 
 ./configure \
-    --prefix=/uny/pkg/"$pkgname"/"$pkgver"
+    --prefix=/uny/pkg/"$pkgname"/"$pkgver" \
+    --enable-static
 
 make -j"$(nproc)"
 
